@@ -15,15 +15,13 @@ class MaterialControllerTest extends TestCase
     {
         $categoria = Categoria::factory()->create();
 
-        // Datos que enviaré al endpoint
         $payload = [
             'categoria_id'  => $categoria->id,
             'unidad_medida' => 'Litro',
             'descripcion'   => 'Agua destilada',
             'ubicacion'     => 'Estantería 3',
         ];
-
-        // Llamo al endpoint y valido respuesta 
+ 
         $this->postJson('/api/materiales', $payload)
              ->assertStatus(201)
              ->assertJsonFragment([
@@ -40,7 +38,6 @@ class MaterialControllerTest extends TestCase
     /** @test */
     public function dadoUnMaterialSinCamposRequeridos_retornaErrorValidacion()
     {
-        // Llamo al endpoint sin nada, espero errores 422 y campos invalidos
         $this->postJson('/api/materiales', [])
              ->assertStatus(422)
              ->assertJsonValidationErrors([

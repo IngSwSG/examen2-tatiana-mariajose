@@ -8,7 +8,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('materiales', function (Blueprint $table) {
-            $table->id();                       // codigo en el diagrama
+            $table->id();              
             $table->string('unidad_medida');
             $table->string('descripcion')->nullable();
             $table->string('ubicacion')->nullable();
