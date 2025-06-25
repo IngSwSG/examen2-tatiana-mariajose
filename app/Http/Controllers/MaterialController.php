@@ -21,4 +21,22 @@ class MaterialController extends Controller
     return response()->json($material->load('categoria'), 201);
 }
 
+public function update(Request $request, Material $material)
+{
+    $data = $request->validate([
+        'categoria_id'  => 'sometimes|exists:categorias,id',
+        'unidad_medida' => 'sometimes|string',
+        'descripcion'   => 'sometimes|string',
+        'ubicacion'     => 'nullable|string',
+    ]);
+
+    $material->update($data);
+
+    return response()->json($material->load('categoria'));
+}
+
+public function index()
+{
+    return Material::with('categoria')->get();
+}
 }
