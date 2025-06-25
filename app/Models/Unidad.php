@@ -3,20 +3,23 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-// app/Models/Unidad.php
 class Unidad extends Model
 {
-    protected $table    = 'unidades';
+    use HasFactory;
+
+    protected $table = 'unidades';
     protected $fillable = ['nombre'];
 
-    public function existencias()
+ 
+    public function materialesUnidad()
     {
-        return $this->hasMany(MaterialUnidad::class);
+        return $this->hasMany(MaterialUnidad::class, 'unidad_id');
     }
 
-    public function requisiciones()
+    public function presupuestos()
     {
-        return $this->hasMany(Requisicion::class);
+        return $this->hasMany(Presupuesto::class, 'unidad_id');
     }
 }

@@ -3,25 +3,24 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-// app/Models/Material.php
 class Material extends Model
 {
-    protected $table    = 'materiales';
+    use HasFactory;
+
+    protected $table = 'materiales';
     protected $fillable = [
-        'categoria_id',
-        'unidad_medida',
-        'descripcion',
-        'ubicacion'
+        'unidad_medida', 'descripcion', 'ubicacion', 'categoria_id'
     ];
 
     public function categoria()
     {
-        return $this->belongsTo(Categoria::class);
+        return $this->belongsTo(Categoria::class, 'categoria_id');
     }
 
-    public function existencias()
+    public function materialesUnidad()
     {
-        return $this->hasMany(MaterialUnidad::class);
+        return $this->hasMany(MaterialUnidad::class, 'material_id');
     }
 }
