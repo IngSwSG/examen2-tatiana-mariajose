@@ -3,15 +3,18 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-// app/Models/Categoria.php
 class Categoria extends Model
 {
-    protected $table   = 'categorias';
+    use HasFactory;
+
+    protected $table    = 'categorias';
+    protected $primaryKey = 'id';
     protected $fillable = ['nombre'];
 
     public function materiales()
     {
-        return $this->hasMany(Material::class);
+        return $this->hasMany(Material::class, 'categoria_id');
     }
 }
